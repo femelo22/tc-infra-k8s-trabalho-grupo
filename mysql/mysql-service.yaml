@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  namespace: tc
+spec:
+  ports:
+    - port: 3306
+  selector:
+    app: mysql
+  clusterIP: None #Quero apenas realizar a comunicação interna, por isso é o tipo ClusterIP

@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wh-payment
+  namespace: tc
+  labels:
+    app: wh-payment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wh-payment
+  template:
+    metadata:
+      labels:
+        app: wh-payment
+    spec:
+      containers:
+        - name: wh-payment
+          image: lfmelo/wh-payment:v1
+          ports:
+            - containerPort: 8081 # Porta também tem que estar mapeada na aplicação para 8081
+          env:
+            - name: SPRING_DATASOURCE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: api-configmap
+                  key: SPRING_DATASOURCE_URL
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: api-configmap
+                  key: SPRING_DATASOURCE_USERNAME
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: api-secrets
+                  key: SPRING_DATASOURCE_PASSWORD
+            - name: SPRING_JPA_HIBERNATE_DDL_AUTO
+              value: update
+            - name: MP_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: api-secrets
+                  key: MP_TOKEN
+          resources:
+            requests:
+              cpu: "200m" # ou 0.2
+              memory: "256Mi"
+            limits:
+              cpu: "500m" # ou 0.5
+              memory: "512Mi"
