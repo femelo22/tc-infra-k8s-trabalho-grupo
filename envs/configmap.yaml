@@ -9,4 +9,4 @@ data:
   AWS_REGION: ca-central-1
   AWS_SQS_URL_CHECKOUT: https://sqs.sa-east-1.amazonaws.com/664418989248/checkout-order
   MP_API_URL: https://api.mercadopago.com/instore/orders/qr/seller/collectors/{userId}/pos/{externalPosId}/qrs
-  MP_NOTIFICATION_URL: https://webhook.site/8258aa39-758e-4dca-b89f-ce258e6b8919
+  MP_NOTIFICATION_URL: https://webhook.site/7416303a-c020-41c4-a2f9-791396ff9260
